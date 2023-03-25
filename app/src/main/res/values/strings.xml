@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CRUD</string>
+    <string name="android_n_development">Android \nDevelopment</string>
+    <string name="app_description">This is a demo application to test database operation, advanched network calling, local db caching, full use of dependency injection, view binding, offline serivices, solve complex UI problems, proper threading and many more.</string>
+    <string name="loader">Loader</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Sign In</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="please_sign_in_to_continue">Please sign in to continue.</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or">Or</string>
+    <string name="login_with_social_accounts">Login With Social Accounts</string>
+</resources>

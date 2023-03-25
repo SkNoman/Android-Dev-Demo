@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.login.FragmentLogin">
+
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutDescription="@xml/fragment_login_xml_constraintlayout7_scene">
+
+
+        <ImageView
+            android:id="@+id/topBlueLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/dashboard"
+            android:src="@drawable/bg_main_activity_top_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivUserLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_input_field_dp15"
+            android:contentDescription="@string/dashboard"
+            android:padding="@dimen/dp5"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintHeight_percent=".1"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".2" />
+
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/please_sign_in_to_continue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txtHi"
+            app:layout_constraintTop_toBottomOf="@+id/txtHi" />
+
+        <TextView
+            android:id="@+id/txtHi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/ivUserLogin" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etUsernameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp20"
+            app:boxStrokeColor="@color/LightBlue"
+            app:hintTextColor="@color/LightBlue"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/topBlueLayout"
+            app:layout_constraintWidth_percent=".9">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_supervised_user_circle_24"
+                android:drawablePadding="@dimen/dp5"
+                android:hint="@string/username"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etUserPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp16"
+            app:boxStrokeColor="@color/LightBlue"
+            app:hintTextColor="@color/LightBlue"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/etUsernameLayout"
+            app:layout_constraintWidth_percent=".9"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/LightBlue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUserPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_security_24"
+                android:drawablePadding="@dimen/dp5"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/btnSignIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp32"
+            android:background="@drawable/bg_rounded_button_dp10"
+            android:padding="@dimen/dp5"
+            android:text="@string/login"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp18"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/etUserPasswordLayout"
+            app:layout_constraintWidth_percent=".4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <TextView
+            android:id="@+id/txtDontHaveAnAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/don_t_have_an_account"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/sp18"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtSignUp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/ivFacebook" />
+
+        <TextView
+            android:id="@+id/txtSignUp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="@dimen/dp5"
+            android:text="@string/sign_up"
+            android:textColor="@color/LightBlue"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/guideline4"
+            app:layout_constraintStart_toEndOf="@+id/txtDontHaveAnAccount"
+            app:layout_constraintTop_toTopOf="@+id/txtDontHaveAnAccount" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <ImageView
+            android:id="@+id/ivGoogle"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/dashboard"
+            android:src="@drawable/google"
+            app:layout_constraintEnd_toStartOf="@+id/ivFacebook"
+            app:layout_constraintTop_toBottomOf="@+id/txtLoginWithSocial"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/ivFacebook"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:contentDescription="@string/dashboard"
+            android:src="@drawable/facebook"
+            app:layout_constraintEnd_toEndOf="@+id/txtLoginWithSocial"
+            app:layout_constraintStart_toStartOf="@+id/txtLoginWithSocial"
+            app:layout_constraintTop_toTopOf="@+id/ivGoogle"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/ivLinkedin"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/dashboard"
+            android:src="@drawable/linkedin"
+            app:layout_constraintStart_toEndOf="@+id/ivFacebook"
+            app:layout_constraintTop_toTopOf="@+id/ivGoogle"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/txtLoginWithSocial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/login_with_social_accounts"
+            android:textSize="@dimen/sp18"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/txtOr" />
+
+        <TextView
+            android:id="@+id/txtOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/or"
+            android:textColor="@color/LightBlue"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+
+</ScrollView>
