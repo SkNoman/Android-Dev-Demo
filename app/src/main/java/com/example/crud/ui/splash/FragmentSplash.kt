@@ -10,7 +10,7 @@ import com.example.crud.BuildConfig
 import com.example.crud.R
 import com.example.crud.base.BaseFragmentWithBinding
 import com.example.crud.databinding.FragmentSplashBinding
-import com.example.crud.utils.Constant.BASE_URL_END_POINT
+import com.example.crud.network.APIEndpoint
 import com.example.crud.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -35,19 +35,18 @@ class FragmentSplash : BaseFragmentWithBinding<FragmentSplashBinding>(FragmentSp
     private suspend fun getBaseUrl() {
         withContext(Main){
             try {
-                splashViewModel.getBaseUrl(BuildConfig.BASE_URL+BASE_URL_END_POINT)
+                splashViewModel.getBaseUrl(BuildConfig.BASE_URL+APIEndpoint.todos)
 
-                splashViewModel.baseUrlLiveData.observe(viewLifecycleOwner){
-                    if (it.result_code == 0){
-                        Log.e("nlog_thread_fragment", Thread.currentThread().toString())
-                        Log.e("nlog",it.result.base_url)
+                splashViewModel.demoLiveData.observe(viewLifecycleOwner){
+                    if (it.toString().isNotEmpty()){
+                        Log.e("nlog",it.string())
                     }else{
                         Log.e("nlog","not found")
                     }
                 }
-                splashViewModel.baseUrlErrorResponse.observe(viewLifecycleOwner){ it ->
+                splashViewModel.errorResponse.observe(viewLifecycleOwner){ it ->
                     it.getContentIfNotHandled()?.let {
-                        Log.e("nlog",it.message)
+                        Log.e("nlog",it)
                     }
                 }
             }catch (e:Exception){
