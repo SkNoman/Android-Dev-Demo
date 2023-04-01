@@ -88,8 +88,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_supervised_user_circle_24"
                 android:drawablePadding="@dimen/dp5"
-                android:hint="@string/username"
-                android:inputType="textPassword" />
+                android:hint="@string/phone"
+                android:maxLength="11"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,6 +116,7 @@
                 android:drawableStart="@drawable/ic_baseline_security_24"
                 android:drawablePadding="@dimen/dp5"
                 android:hint="@string/password"
+                android:maxLength="8"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

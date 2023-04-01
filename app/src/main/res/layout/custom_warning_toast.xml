@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/toast_container">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/button_card_parent"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            app:cardElevation="20dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/button_click_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_warning_toast"
+                android:clickable="true"
+                android:focusable="true">
+
+                <FrameLayout
+                    android:id="@+id/button_accent_border"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:background="#E20505"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/toast_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="@string/this_is_a_custom_toast"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/button_accent_border"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/toast_text"
+                    android:contentDescription="@string/app_description"
+                    android:src="@drawable/ic_baseline_warning_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

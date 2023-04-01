@@ -1,21 +1,33 @@
 package com.example.crud.network
 
-import com.example.crud.model.GetBaseUrlResponse
+import com.example.crud.model.free.Users
+import com.example.crud.model.login.LoginResponse
+import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Url
+import retrofit2.http.*
 
 interface APIInterface {
+
     @GET()
-    fun getBaseUrl(
+    fun getWholeUsers(
         @Url url:String,
-        @Header("X-RequestHash") requestHash:String
-    ): Call<GetBaseUrlResponse>
+    ): Call<Users>
+
+    @GET()
+    fun getAppStatus(
+        @Url url: String,
+        @Header ("X-RequestHash") requestHash: String
+    ): Call<ResponseBody>
 
     @GET()
     fun getDemoData(
-        @Url url:String
+        @Url url:String,
     ):Call<ResponseBody>
+
+    @POST()
+    fun signIn(
+        @Url url:String,
+        @Body jsonObject: JsonObject
+    ):Call<LoginResponse>
 }

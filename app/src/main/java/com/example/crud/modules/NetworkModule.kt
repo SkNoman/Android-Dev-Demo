@@ -36,11 +36,7 @@ object NetworkModule {
 
         val clientInterceptor = Interceptor { chain: Interceptor.Chain ->
             var request = chain.request()
-            val url = request.url.newBuilder()
-                .addQueryParameter(KEY_JSON,"true")
-                .addQueryParameter(KEY_CLIENT_TYPE, CLIENT_TYPE.toString())
-                .addQueryParameter(KEY_CLIENT_VERSION, KEY_CURRENT_BUILD_VERSION.toString())
-                .build()
+            val url = request.url.newBuilder().build()
             request = request.newBuilder().url(url).build()
             chain.proceed(request)
         }

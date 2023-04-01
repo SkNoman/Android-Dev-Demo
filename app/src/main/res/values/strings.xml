@@ -15,4 +15,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="or">Or</string>
     <string name="login_with_social_accounts">Login With Social Accounts</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="android_studio">android Studio</string>
+    <string name="this_is_a_custom_toast">This is a custom Toast</string>
+    <string name="phone">Phone</string>
 </resources>

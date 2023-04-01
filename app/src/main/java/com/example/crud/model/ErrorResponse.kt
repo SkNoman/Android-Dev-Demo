@@ -1,6 +1,6 @@
 package com.example.crud.model
 
 data class ErrorResponse(
-    var result_code: Int,
+    var status: Int,
     var message: String
 )

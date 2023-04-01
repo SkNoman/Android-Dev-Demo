@@ -1,5 +1,6 @@
 package com.example.crud.network
 
 object APIEndpoint {
-    const val todos = "todos/1"
+    const val LOGIN = "login"
+    const val ALL_CARS_LIST = "get-allcars"
 }

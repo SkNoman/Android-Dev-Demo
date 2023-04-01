@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="TransOffWhite">#BAF2F2F2</color>
     <color name="LightBlue">#2196F3</color>
+    <color name="transparent">#00000000</color>
 </resources>
