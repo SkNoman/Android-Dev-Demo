@@ -21,10 +21,10 @@ class SignInSignUpViewModel @Inject constructor(private val singUpRepository: Si
         singUpRepository.signIn(url,jsonObject,this)
     }
     override fun onLoginResponse(data: LoginResponse) {
-        loginResponseLiveData.postValue(data)
+        loginResponseLiveData.value = data
     }
 
     override fun onError(data: ErrorResponse) {
-        errorResponse.postValue(data)
+        errorResponse.value = data
     }
 }

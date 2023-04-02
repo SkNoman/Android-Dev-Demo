@@ -22,7 +22,6 @@ class SignInSingUpRepository @Inject constructor(private val api: APIInterface) 
                if (response.isSuccessful){
                    onCallback.onLoginResponse(response.body()!!)
                }
-
            }
 
            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {

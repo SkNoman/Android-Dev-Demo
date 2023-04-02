@@ -90,7 +90,7 @@
                 android:drawablePadding="@dimen/dp5"
                 android:hint="@string/phone"
                 android:maxLength="11"
-                android:inputType="text" />
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

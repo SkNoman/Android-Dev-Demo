@@ -1,21 +1,15 @@
 package com.example.crud
 
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.crud.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,13 +81,19 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         try {
-            if (navController.currentDestination?.id == R.id.fragmentLogin){
-                finish()
-            }else{
-                super.onBackPressed()
+            when (navController.currentDestination?.id) {
+                R.id.fragmentLogin -> {
+                    finish()
+                }
+                R.id.fragmentUserDashboard -> {
+                    finish()
+                }
+                else -> {
+                    super.onBackPressed()
+                }
             }
         }catch (e:Exception){
-            Log.e("nlogE",e.toString())
+            Log.e("nlog-exc-BackPressed",e.toString())
         }
 
     }

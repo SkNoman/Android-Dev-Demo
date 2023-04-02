@@ -1,26 +1,20 @@
 package com.example.crud.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.crud.BuildConfig.BASE_URL
 import com.example.crud.R
 import com.example.crud.base.BaseFragmentWithBinding
 import com.example.crud.databinding.FragmentLoginBinding
-import com.example.crud.network.APIEndpoint
-import com.example.crud.network.APIEndpoint.ALL_CARS_LIST
 import com.example.crud.network.APIEndpoint.LOGIN
 import com.example.crud.utils.Constant
 import com.example.crud.utils.showCustomToast
-import com.example.crud.viewmodel.DemoViewModel
 import com.example.crud.viewmodel.SignInSignUpViewModel
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.sign
 
 @AndroidEntryPoint
 class FragmentLogin: BaseFragmentWithBinding<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
@@ -28,61 +22,53 @@ class FragmentLogin: BaseFragmentWithBinding<FragmentLoginBinding>(FragmentLogin
 
     private val signInSignUpViewModel: SignInSignUpViewModel by viewModels()
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.btnSignIn.setOnClickListener {
+
             val validationMessage = validateInputs()
+
             if (validationMessage == "ok"){
-                loginUserDefault()
+
+                val body = JsonObject()
+                body.addProperty("phone",binding.etUserName.text.toString())
+                body.addProperty("password",binding.etUserPassword.text.toString())
+                try {
+                    signInSignUpViewModel.signIn(BASE_URL+ LOGIN,body)
+                }catch (e:Exception){
+                    Toast.makeText(requireContext(),e.toString(),Toast.LENGTH_LONG).show()
+                }
+
             }else{
                 Toast(requireContext()).showCustomToast(validationMessage,requireActivity())
             }
         }
-        observeLoginData()
 
-    }
-
-    private fun observeLoginData() {
-        try {
-            signInSignUpViewModel.loginResponseLiveData.observe(viewLifecycleOwner) {
-
-                if (it.status == 200) {
-                    if (it.isSuccess == true) {
-                        findNavController().navigate(R.id.fragmentUserDashboard)
-                        Toast.makeText(requireContext(),it.message.toString(),Toast.LENGTH_SHORT).show()
-                    } else if (it.isSuccess == false) {
-                        Toast(requireContext()).showCustomToast(it.message.toString(),requireActivity())
-                    }
+        //OBSERVE LOGIN RESPONSE
+        signInSignUpViewModel.loginResponseLiveData.observe(viewLifecycleOwner) {
+            if (it.status == 200) {
+                if (it.isSuccess == true) {
+                    binding.etUserPassword.text = null
+                    findNavController().navigate(R.id.fragmentUserDashboard)
+                    Toast.makeText(requireContext(),it.message.toString(),Toast.LENGTH_SHORT).show()
+                } else if (it.isSuccess == false) {
+                    showToast(it.message.toString())
                 }
             }
-        }catch (e:Exception){
-            Toast.makeText(requireContext(),e.toString(),Toast.LENGTH_LONG).show()
         }
 
-        try {
-            signInSignUpViewModel.errorResponse.observe(viewLifecycleOwner, Observer {
-                if (it.status == 500){
-                    Log.e("nlog-error",it.message)
-                }else{
-                    Log.e("nlog-error-undefined",Constant.ERROR_MESSAGE)
-                }
-            })
-        }catch (e:Exception){
-            Toast.makeText(requireContext(),e.toString(),Toast.LENGTH_LONG).show()
+        //OBSERVE LOGIN ERROR RESPONSE
+        signInSignUpViewModel.errorResponse.observe(viewLifecycleOwner) {
+            if (it.status == 500) {
+                showToast(it.message)
+            } else {
+                showToast(Constant.ERROR_MESSAGE)
+            }
         }
     }
 
-    private fun loginUserDefault() {
-
-        val body = JsonObject()
-        body.addProperty("phone",binding.etUserName.text.toString())
-        body.addProperty("password",binding.etUserPassword.text.toString())
-        try {
-            signInSignUpViewModel.signIn(BASE_URL+ LOGIN,body)
-        }catch (e:Exception){
-            Toast.makeText(requireContext(),e.toString(),Toast.LENGTH_LONG).show()
-        }
-    }
 
     private fun validateInputs(): String {
         binding.apply {
@@ -98,5 +84,9 @@ class FragmentLogin: BaseFragmentWithBinding<FragmentLoginBinding>(FragmentLogin
             }
         }
         return "ok"
+    }
+
+    private fun showToast(message: String){
+        Toast(requireContext()).showCustomToast(message,requireActivity())
     }
 }
