@@ -1,5 +1,6 @@
 package com.example.crud.network
 
+import com.example.crud.model.dashboard.DashboardMainMenuResponse
 import com.example.crud.model.free.Users
 import com.example.crud.model.login.LoginResponse
 import com.google.gson.JsonObject
@@ -30,4 +31,9 @@ interface APIInterface {
         @Url url:String,
         @Body jsonObject: JsonObject
     ):Call<LoginResponse>
+
+    @GET()
+    fun getMainMenuList(
+        @Url url: String
+    ):Call<DashboardMainMenuResponse>
 }

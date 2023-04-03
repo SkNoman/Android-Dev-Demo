@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -27,12 +28,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navController = findNavController(R.id.nav_host_fragment_content_main)
-        drawerLayout = binding.drawerLayout
-
-        //OPEN NAV DRAWER FROM DEFAULT TOOLBAR
-         toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//        drawerLayout = binding.drawerLayout
+//        //OPEN NAV DRAWER FROM DEFAULT TOOLBAR
+//         toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
 
         //OPEN NAV DRAWER FROM CUSTOM TOOLBAR BUTTON
        /* binding.btnMenu.setOnClickListener {
@@ -41,40 +42,41 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }*/
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val navView: NavigationView = binding.navigationView
-
-        navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.users -> navController.navigate(R.id.fragmentUserDashboard)
-                R.id.item2 -> Toast.makeText(this,"Clicked Menu 2",Toast.LENGTH_SHORT).show()
-                R.id.item3 -> Toast.makeText(this,"Clicked Menu 3",Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        val navView: NavigationView = binding.navigationView
+//
+//        navView.setNavigationItemSelectedListener {
+//            when(it.itemId){
+//                R.id.users -> navController.navigate(R.id.fragmentUserDashboard)
+//                R.id.item2 -> Toast.makeText(this,"Clicked Menu 2",Toast.LENGTH_SHORT).show()
+//                R.id.item3 -> Toast.makeText(this,"Clicked Menu 3",Toast.LENGTH_SHORT).show()
+//            }
+//            true
+//        }
 
 
         //CHANGE THE VIEW OR ACTIVITIES IN DIFFERENT FRAGMENTS
-        navController.addOnDestinationChangedListener{controller,destination,arguments ->
-            when(destination.id){
-                R.id.fragmentSplash ->{
-                    //supportActionBar?.hide()
-                    binding.toolbar.visibility = View.GONE
-                    // Set the window flags to hide the status bar and enable full screen mode
-                    //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-                    // Disable the navigation drawer
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-                }else -> {
-                //supportActionBar?.show()
-               // binding.toolbar.visibility = View.VISIBLE
-                // Set the window flags to hide the status bar and enable full screen mode
-                //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-                // Disable the navigation drawer
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                }
-            }
-        }
+//        navController.addOnDestinationChangedListener{controller,destination,arguments ->
+//            when(destination.id){
+//                R.id.fragmentSplash ->{
+//                    //supportActionBar?.hide()
+//                    binding.toolbar.visibility = View.GONE
+//                    // Set the window flags to hide the status bar and enable full screen mode
+//                    //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//                    // Disable the navigation drawer
+//                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+//
+//                }else -> {
+//                //supportActionBar?.show()
+//               // binding.toolbar.visibility = View.VISIBLE
+//                // Set the window flags to hide the status bar and enable full screen mode
+//                window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//                // Disable the navigation drawer
+//                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+//                binding.toolbar.visibility = View.GONE
+//                }
+//            }
+//        }
 
     }
 
@@ -98,11 +100,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (toggle.onOptionsItemSelected(item)){
+//            return true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
 }
