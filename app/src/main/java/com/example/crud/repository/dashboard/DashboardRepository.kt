@@ -40,8 +40,8 @@ class DashboardRepository @Inject constructor(private val api: APIInterface,priv
         dao.saveDashboardMenus(menus)
     }
 
-    suspend fun deleteDashboardMainMenuFromLocalDb(menus: List<MenusItem>){
+    suspend fun deleteDashboardMainMenuFromLocalDb(){
         Log.e("nlog-dr","yes")
-        dao.deleteAllDashboardMenuFromLocal(menus)
+        dao.deleteAllDashboardMenuFromLocal()
     }
 }

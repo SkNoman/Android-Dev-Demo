@@ -34,10 +34,10 @@ class DashboardViewModel @Inject constructor(private val dashboardRepository: Da
             dashboardRepository.insertDashboardMainMenuToLocalDB(menusItem)
         }
     }
-    fun deleteDashboardMainMenuFromLocalDB(menusItem: List<MenusItem>){
+    fun deleteDashboardMainMenuFromLocalDB(){
         Log.e("nlog-dv","yes")
         viewModelScope.launch {
-            dashboardRepository.deleteDashboardMainMenuFromLocalDb(menusItem)
+            dashboardRepository.deleteDashboardMainMenuFromLocalDb()
         }
     }
 

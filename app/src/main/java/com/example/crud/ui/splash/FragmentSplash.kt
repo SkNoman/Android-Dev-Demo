@@ -20,7 +20,7 @@ class FragmentSplash : BaseFragmentWithBinding<FragmentSplashBinding>(FragmentSp
         Glide.with(this).asGif().load(R.drawable.loader_slow_jump_moving).into(binding.loader)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.fragmentUserDashboard)
+            findNavController().navigate(R.id.fragmentLogin)
         }, 3000)
     }
 }

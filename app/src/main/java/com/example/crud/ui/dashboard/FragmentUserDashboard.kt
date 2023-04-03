@@ -27,10 +27,6 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val localDbVersion = SharedPref.getData(requireContext()).getInt("dbVersion",0)
-        binding.btnDelete.setOnClickListener{
-            dashboardViewModel.deleteDashboardMainMenuFromLocalDB()
-        }
-
         try {
             demoViewModel.getDemoData(BuildConfig.BASE_URL+APIEndpoint.GET_LOCAL_DB_INFO)
             demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
@@ -70,7 +66,7 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
             dashboardViewModel.mainMenuListLiveData.observe(viewLifecycleOwner) {
                 if (it.menus!!.isNotEmpty()){
                     try {
-
+                        dashboardViewModel.deleteDashboardMainMenuFromLocalDB()
                         dashboardViewModel.insertMainMenusToLocalDB(it.menus)
                     }catch (e:Exception){
                         Log.e("nlog-local-save-exc",e.toString())

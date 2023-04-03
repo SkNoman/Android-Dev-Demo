@@ -1,12 +1,15 @@
 package com.example.crud.local.dao
 
+import androidx.compose.ui.unit.Constraints
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.crud.local.LocalTableName
 import com.example.crud.model.dashboard.MenusItem
+import com.example.crud.utils.Constant
 
 @Dao
 interface DashboardDao {
@@ -16,6 +19,6 @@ interface DashboardDao {
     @Query("SELECT * FROM tbl_db_main_menu ORDER BY menuId ASC")
     fun getAllDashboardMenuFromLocal():LiveData<List<MenusItem>>
 
-    @Delete
-    suspend fun deleteAllDashboardMenuFromLocal(menus:List<MenusItem>)
+    @Query("DELETE FROM ".plus(LocalTableName.TBL_DB_MAIN_MENU))
+    suspend fun deleteAllDashboardMenuFromLocal()
 }
