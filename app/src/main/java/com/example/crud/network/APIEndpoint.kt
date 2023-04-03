@@ -5,4 +5,5 @@ object APIEndpoint {
     const val ALL_CARS_LIST = "get-allcars"
 
     const val MAIN_MENU = "main-menu"
+    const val GET_LOCAL_DB_INFO = "local-db-info"
 }

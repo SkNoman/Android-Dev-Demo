@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.crud.BuildConfig
 import com.example.crud.base.BaseFragmentWithBinding
@@ -13,6 +14,7 @@ import com.example.crud.model.dashboard.MenusItem
 import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.DashboardMainMenuAdapter
 import com.example.crud.viewmodel.DashboardViewModel
+import com.example.crud.viewmodel.DemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,12 +22,31 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
     (FragmentUserDashboardBinding:: inflate) {
 
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val demoViewModel: DemoViewModel by viewModels()
+    private var localDbVersion = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         try {
+            demoViewModel.getDemoData(BuildConfig.BASE_URL+APIEndpoint.GET_LOCAL_DB_INFO)
+            demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
+                val response = it.string()
+                val regex = Regex(":([0-9]+)")
+                val matchResult = regex.find(response)
+                if (matchResult != null) {
+                    val dbVersion = matchResult.groupValues[1].toInt()
+                    Log.e("nlog-local-db-version",dbVersion.toString())
+                    localDbVersion = dbVersion
+                }
+
+                Log.e("nlog-local-db-info", response)
+            }
+
             dashboardViewModel.getDashboardMainMenuFromLocalDB.observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
+                if (localDbVersion>1){
+                    fetchMenuFromRemote()
+                }
+                else if (it.isNotEmpty()) {
                     Log.e("nlog-local-menu",it.toString())
                     showMenus(it)
                 } else {
