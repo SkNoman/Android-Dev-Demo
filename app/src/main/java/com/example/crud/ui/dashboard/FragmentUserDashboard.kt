@@ -13,6 +13,7 @@ import com.example.crud.databinding.FragmentUserDashboardBinding
 import com.example.crud.model.dashboard.MenusItem
 import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.DashboardMainMenuAdapter
+import com.example.crud.utils.SharedPref
 import com.example.crud.viewmodel.DashboardViewModel
 import com.example.crud.viewmodel.DemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +24,13 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
 
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val demoViewModel: DemoViewModel by viewModels()
-    private var localDbVersion = 1
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val localDbVersion = SharedPref.getData(requireContext()).getInt("dbVersion",0)
+        binding.btnDelete.setOnClickListener{
+            dashboardViewModel.deleteDashboardMainMenuFromLocalDB()
+        }
+
         try {
             demoViewModel.getDemoData(BuildConfig.BASE_URL+APIEndpoint.GET_LOCAL_DB_INFO)
             demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
@@ -35,40 +39,38 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                 val matchResult = regex.find(response)
                 if (matchResult != null) {
                     val dbVersion = matchResult.groupValues[1].toInt()
-                    Log.e("nlog-local-db-version",dbVersion.toString())
-                    localDbVersion = dbVersion
-                }
-
-                Log.e("nlog-local-db-info", response)
-            }
-
-            dashboardViewModel.getDashboardMainMenuFromLocalDB.observe(viewLifecycleOwner) {
-                if (localDbVersion>1){
-                    fetchMenuFromRemote()
-                }
-                else if (it.isNotEmpty()) {
-                    Log.e("nlog-local-menu",it.toString())
-                    showMenus(it)
-                } else {
-                    fetchMenuFromRemote()
+                    Log.e("db-versions","local: $localDbVersion, remote: $dbVersion")
+                    SharedPref.sharedPrefManger(requireContext(),dbVersion,"dbVersion")
+                    if (dbVersion>localDbVersion){
+                        fetchMenuFromRemote()
+                    }else{
+                        fetchMenuFromLocal()
+                    }
                 }
             }
-
         }catch (e:Exception){
-            Log.e("nlog-fetch-local-menus",e.toString())
+            Log.e("nlog-fetch-db-version",e.toString())
+        }
+    }
+
+    private fun fetchMenuFromLocal() {
+        dashboardViewModel.getDashboardMainMenuFromLocalDB.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                Log.e("nlog-local-menus","Not empty")
+                showMenus(it)
+            }
         }
     }
 
     private fun fetchMenuFromRemote() {
-        Log.e("nlog-is-enter","yes")
+        Log.e("nlog-is-enter-remote","yes")
         try {
             dashboardViewModel.getMainManuList(BuildConfig.BASE_URL+APIEndpoint.MAIN_MENU)
 
             dashboardViewModel.mainMenuListLiveData.observe(viewLifecycleOwner) {
                 if (it.menus!!.isNotEmpty()){
-                    Log.e("nlog-main-menu",it.menus.toString())
                     try {
-                        dashboardViewModel.deleteDashboardMainMenuFromLocalDB(it.menus)
+
                         dashboardViewModel.insertMainMenusToLocalDB(it.menus)
                     }catch (e:Exception){
                         Log.e("nlog-local-save-exc",e.toString())
