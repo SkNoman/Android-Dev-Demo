@@ -1,6 +1,5 @@
 package com.example.crud.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,7 +34,6 @@ class DashboardViewModel @Inject constructor(private val dashboardRepository: Da
         }
     }
     fun deleteDashboardMainMenuFromLocalDB(){
-        Log.e("nlog-dv","yes")
         viewModelScope.launch {
             dashboardRepository.deleteDashboardMainMenuFromLocalDb()
         }

@@ -1,7 +1,6 @@
 package com.example.crud.ui.adapters
 
 import android.content.Context
-import android.text.Html.ImageGetter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,11 +10,15 @@ import com.bumptech.glide.Glide
 import com.example.crud.R
 import com.example.crud.model.dashboard.MenusItem
 
-class DashboardMainMenuAdapter(context: Context,menuList: List<MenusItem>)
+class DashboardMainMenuAdapter(
+    context: Context,
+    menuList: List<MenusItem>,
+    private var onMenuItemClick: OnClickMenu
+)
     :RecyclerView.Adapter<MenuItemViewHolder>(){
 
-    private val content: List<MenusItem> = menuList
     var mContext: Context = context
+    private val content: List<MenusItem> = menuList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,12 +28,17 @@ class DashboardMainMenuAdapter(context: Context,menuList: List<MenusItem>)
     override fun onBindViewHolder(holder: MenuItemViewHolder, position: Int) {
         val menuContent: MenusItem = content[position]
         holder.bind(mContext,menuContent)
+        holder.itemView.setOnClickListener{
+            menuContent.menuId?.let { it1 -> onMenuItemClick.onClick(it1) }
+        }
     }
 
     override fun getItemCount(): Int {
         return content.size
     }
-
+}
+interface OnClickMenu{
+    fun onClick(id:Int)
 }
 class MenuItemViewHolder(inflater: LayoutInflater,parent: ViewGroup):
 RecyclerView.ViewHolder(inflater.inflate(R.layout.item_home_main_menu,parent,false)){

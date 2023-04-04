@@ -35,5 +35,14 @@
         android:id="@+id/fragmentUserDashboard"
         android:name="com.example.crud.ui.dashboard.FragmentUserDashboard"
         android:label="fragment_user_dashboard"
-        tools:layout="@layout/fragment_user_dashboard" />
+        tools:layout="@layout/fragment_user_dashboard" >
+        <action
+            android:id="@+id/action_fragmentUserDashboard_to_fragmentCars"
+            app:destination="@id/fragmentCars" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCars"
+        android:name="com.example.crud.ui.dashboard.menus.FragmentCars"
+        android:label="fragment_cars"
+        tools:layout="@layout/fragment_cars" />
 </navigation>

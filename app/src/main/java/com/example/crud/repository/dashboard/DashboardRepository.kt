@@ -1,6 +1,5 @@
 package com.example.crud.repository.dashboard
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.crud.callbacks.dashboard.MainMenuCallbacks
 import com.example.crud.local.dao.DashboardDao
@@ -41,7 +40,6 @@ class DashboardRepository @Inject constructor(private val api: APIInterface,priv
     }
 
     suspend fun deleteDashboardMainMenuFromLocalDb(){
-        Log.e("nlog-dr","yes")
         dao.deleteAllDashboardMenuFromLocal()
     }
 }

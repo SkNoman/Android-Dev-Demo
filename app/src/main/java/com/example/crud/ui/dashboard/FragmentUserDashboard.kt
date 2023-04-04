@@ -2,25 +2,28 @@ package com.example.crud.ui.dashboard
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.crud.BuildConfig
+import com.example.crud.R
 import com.example.crud.base.BaseFragmentWithBinding
 import com.example.crud.databinding.FragmentUserDashboardBinding
 import com.example.crud.model.dashboard.MenusItem
 import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.DashboardMainMenuAdapter
+import com.example.crud.ui.adapters.OnClickMenu
 import com.example.crud.utils.SharedPref
+import com.example.crud.utils.showCustomToast
 import com.example.crud.viewmodel.DashboardViewModel
 import com.example.crud.viewmodel.DemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.annotation.meta.When
 
 @AndroidEntryPoint
 class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBinding>
-    (FragmentUserDashboardBinding:: inflate) {
+    (FragmentUserDashboardBinding:: inflate),OnClickMenu {
 
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val demoViewModel: DemoViewModel by viewModels()
@@ -45,7 +48,7 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                 }
             }
         }catch (e:Exception){
-            Log.e("nlog-fetch-db-version",e.toString())
+            Toast(requireContext()).showCustomToast(e.toString(),requireActivity())
         }
     }
 
@@ -69,19 +72,32 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                         dashboardViewModel.deleteDashboardMainMenuFromLocalDB()
                         dashboardViewModel.insertMainMenusToLocalDB(it.menus)
                     }catch (e:Exception){
-                        Log.e("nlog-local-save-exc",e.toString())
+                        Toast(requireContext()).showCustomToast(e.toString(),requireActivity())
                     }
                     showMenus(it.menus)
                 }
             }
         }catch (e:Exception){
-            Log.e("nlog-fetch-remote-menus",e.toString())
+            Toast(requireContext()).showCustomToast(e.toString(),requireActivity())
         }
     }
 
     private fun showMenus(menusItem: List<MenusItem>) {
         binding.recyclerviewMainMenu.layoutManager =
             GridLayoutManager(activity,3,GridLayoutManager.VERTICAL,false)
-        binding.recyclerviewMainMenu.adapter = DashboardMainMenuAdapter(requireContext(),menusItem)
+        binding.recyclerviewMainMenu.adapter =
+            DashboardMainMenuAdapter(requireContext(),menusItem,this)
+    }
+
+    override fun onClick(id: Int) {
+        //EACH ID REPRESENTS DIFFERENT FEATURE WHICH IS DEFINED IN DATABASE
+        when(id){
+            1->{
+                findNavController().navigate(R.id.fragmentCars)
+            }
+            else->{
+                Toast.makeText(requireContext(),"This feature is under development",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
