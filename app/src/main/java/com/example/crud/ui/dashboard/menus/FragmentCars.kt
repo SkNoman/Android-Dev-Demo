@@ -11,6 +11,6 @@ class FragmentCars : BaseFragmentWithBinding<FragmentCarsBinding>
 {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.txtDemo.text = "Welcome To Cars Fragment"
+       // binding.txtDemo.text = "Welcome To Cars Fragment"
     }
 }

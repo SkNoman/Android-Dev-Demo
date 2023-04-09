@@ -105,9 +105,6 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:2.4.3"
 
 
-
-
-
 }
 
 //get base url from local properties file

@@ -17,7 +17,7 @@ class DashboardMainMenuAdapter(
 )
     :RecyclerView.Adapter<MenuItemViewHolder>(){
 
-    var mContext: Context = context
+    private var mContext: Context = context
     private val content: List<MenusItem> = menuList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuItemViewHolder {
@@ -43,8 +43,8 @@ interface OnClickMenu{
 class MenuItemViewHolder(inflater: LayoutInflater,parent: ViewGroup):
 RecyclerView.ViewHolder(inflater.inflate(R.layout.item_home_main_menu,parent,false)){
 
-    var title: TextView = itemView.findViewById(R.id.menu_title)
-    var icon: ImageView = itemView.findViewById(R.id.menu_icon)
+    private var title: TextView = itemView.findViewById(R.id.menu_title)
+    private var icon: ImageView = itemView.findViewById(R.id.menu_icon)
 
     fun bind(context: Context,menuData:MenusItem){
         title.text = menuData.menuTitle

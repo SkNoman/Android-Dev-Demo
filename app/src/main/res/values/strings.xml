@@ -20,5 +20,7 @@
     <string name="android_studio">android Studio</string>
     <string name="this_is_a_custom_toast">This is a custom Toast</string>
     <string name="phone">Phone</string>
-    <string name="car_hub">Car Hub</string>
+    <string name="car_hub">AWAZ Test</string>
+    <string name="popular_tab">Popular Tab</string>
+    <string name="all_time_best_selling_vehicles">All Time Best Selling Vehicles</string>
 </resources>

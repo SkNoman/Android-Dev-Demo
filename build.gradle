@@ -4,7 +4,10 @@
 buildscript {
     repositories {
         // other repositories...
+        google()
+        jcenter()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         // other plugins...
