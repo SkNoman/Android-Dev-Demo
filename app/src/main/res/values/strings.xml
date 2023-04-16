@@ -23,4 +23,5 @@
     <string name="car_hub">AWAZ Test</string>
     <string name="popular_tab">Popular Tab</string>
     <string name="all_time_best_selling_vehicles">All Time Best Selling Vehicles</string>
+    <string name="pls_chk_internet">Please check your internet connection</string>
 </resources>

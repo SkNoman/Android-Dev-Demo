@@ -1,9 +1,11 @@
 package com.example.crud.ui.dashboard
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,7 @@ import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.DashboardMainMenuAdapter
 import com.example.crud.ui.adapters.FeaturedListItemAdapter
 import com.example.crud.ui.adapters.OnClickMenu
+import com.example.crud.utils.CheckNetwork
 import com.example.crud.utils.SharedPref
 import com.example.crud.utils.showCustomToast
 import com.example.crud.viewmodel.DashboardViewModel
@@ -36,11 +39,20 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
     private val timer = Timer()
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val demoViewModel: DemoViewModel by viewModels()
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val localDbVersion = SharedPref.getData(requireContext()).getInt("dbVersion",0)
         try {
-            demoViewModel.getDemoData(BuildConfig.BASE_URL+APIEndpoint.GET_LOCAL_DB_INFO)
+            if (CheckNetwork(requireContext()).isNetworkConnected){
+                Log.e("nlog-net","Yes")
+                demoViewModel.getDemoData(BuildConfig.BASE_URL+APIEndpoint.GET_LOCAL_DB_INFO)
+            }else{
+                Toast(requireContext()).showCustomToast(getString(R.string.pls_chk_internet)
+                    ,requireActivity())
+                fetchMenuFromLocal()
+            }
+            //fetchMenuFromLocal()
             demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
                 val response = it.string()
                 val regex = Regex(":([0-9]+)")
