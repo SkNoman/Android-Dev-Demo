@@ -26,9 +26,7 @@ import com.example.crud.utils.showCustomToast
 import com.example.crud.viewmodel.DashboardViewModel
 import com.example.crud.viewmodel.DemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 
@@ -78,7 +76,7 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
     }
 
 
-    private suspend fun featuredRecycler() {
+    private  fun featuredRecycler() {
         binding.featuredRecyclerView.setHasFixedSize(true)
         binding.featuredRecyclerView.layoutManager = LinearLayoutManager(
             requireContext(),
@@ -113,34 +111,6 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
             LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
         binding.featuredRecyclerView.adapter =
             FeaturedListItemAdapter(requireContext(),featuredLocations)
-
-        withContext(Dispatchers.IO){
-            val delay = 2000L // Delay in milliseconds before the first scroll
-            val interval = 3000L // Interval in milliseconds between subsequent scrolls
-
-            timer.schedule(object : TimerTask() {
-
-                override fun run() {
-                    // Get the current position of the RecyclerView
-                    val currentPosition = (binding.featuredRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                    // Calculate the next position to scroll to
-                    val nextPosition = if (currentPosition < (binding.featuredRecyclerView.adapter?.itemCount
-                            ?: (0 - 2))
-                    ) {
-                        currentPosition + 1
-                    } else { 0 }
-                    // Scroll to the next position
-                    activity?.runOnUiThread {
-                        // Scroll to the next position
-                        binding.featuredRecyclerView.scrollToPosition(nextPosition)
-                        // If the next position is 0 (i.e., reached the end), scroll back to the first position
-                        if (nextPosition == 3) {
-                            binding.featuredRecyclerView.scrollToPosition(0)
-                        }
-                    }
-                }
-            }, delay, interval)
-        }
     }
 
 
