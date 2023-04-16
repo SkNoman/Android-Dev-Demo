@@ -2,7 +2,6 @@ package com.example.crud.ui.dashboard
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -45,21 +44,18 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
         val localDbVersion = SharedPref.getData(requireContext()).getInt("dbVersion",0)
         try {
             if (CheckNetwork(requireContext()).isNetworkConnected){
-                Log.e("nlog-net","Yes")
                 demoViewModel.getDemoData(BuildConfig.BASE_URL+APIEndpoint.GET_LOCAL_DB_INFO)
             }else{
                 Toast(requireContext()).showCustomToast(getString(R.string.pls_chk_internet)
                     ,requireActivity())
                 fetchMenuFromLocal()
             }
-            //fetchMenuFromLocal()
             demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
                 val response = it.string()
                 val regex = Regex(":([0-9]+)")
                 val matchResult = regex.find(response)
                 if (matchResult != null) {
                     val dbVersion = matchResult.groupValues[1].toInt()
-                    Log.e("db-versions","local: $localDbVersion, remote: $dbVersion")
                     SharedPref.sharedPrefManger(requireContext(),dbVersion,"dbVersion")
                     if (dbVersion>localDbVersion){
                         fetchMenuFromRemote()
@@ -89,26 +85,28 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
         val featuredLocations: ArrayList<FeaturedItem> = ArrayList()
+        //MANUAL ADDITION OF RECYCLER CARD VIEW
         featuredLocations.add(
             FeaturedItem(
                 R.drawable.google,
-                "Home Automation",
-                "We can automate your home"
+                "Google",
+                "The best search engine"
             )
-        ) // manual addition of recycler card view
+        )
         featuredLocations.add(
             FeaturedItem(
                 R.drawable.facebook,
-                "Plumber",
-                "We always serve you skilled person"
+                "Facebook",
+                "Best social media platform"
             )
         )
         featuredLocations.add(
             FeaturedItem(
                 R.drawable.linkedin,
-                "Ac Mechanic",
-                "Our skilled mechanic can deal with any problem with your Ac"
+                "Linkedin",
+                "Best professional media"
             )
         )
         binding.featuredRecyclerView.layoutManager =
@@ -150,17 +148,19 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
     private fun fetchMenuFromLocal() {
         dashboardViewModel.getDashboardMainMenuFromLocalDB.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                Log.e("nlog-local-menus","Not empty")
                 showMenus(it)
             }
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun fetchMenuFromRemote() {
-        Log.e("nlog-is-enter-remote","yes")
         try {
-            dashboardViewModel.getMainManuList(BuildConfig.BASE_URL+APIEndpoint.MAIN_MENU)
-
+            if(CheckNetwork(requireContext()).isNetworkConnected){
+                dashboardViewModel.getMainManuList(BuildConfig.BASE_URL+APIEndpoint.MAIN_MENU)
+            }else{
+                Toast(requireContext()).showCustomToast(getString(R.string.pls_chk_internet),requireActivity())
+            }
             dashboardViewModel.mainMenuListLiveData.observe(viewLifecycleOwner) {
                 if (it.menus!!.isNotEmpty()){
                     try {
