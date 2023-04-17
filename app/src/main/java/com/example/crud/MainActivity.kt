@@ -2,17 +2,12 @@ package com.example.crud
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.crud.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navController = findNavController(R.id.nav_host_fragment_content_main)
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 //        drawerLayout = binding.drawerLayout
 //        //OPEN NAV DRAWER FROM DEFAULT TOOLBAR
 //         toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close)

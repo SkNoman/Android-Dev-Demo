@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crud.base.BaseFragmentWithBinding
 import com.example.crud.databinding.FragmentCarsBinding
 import com.example.crud.model.dashboard.MenusItem
-import com.example.crud.ui.adapters.DashboardMainMenuAdapter
-import com.example.crud.ui.adapters.OnClickMenu
+import com.example.crud.ui.adapters.CarListAdapter
+import com.example.crud.ui.adapters.OnClickCar
 import com.example.crud.viewmodel.DashboardViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FragmentCars : BaseFragmentWithBinding<FragmentCarsBinding>
-    (FragmentCarsBinding::inflate),OnClickMenu
+    (FragmentCarsBinding::inflate),OnClickCar
 {
     private val dashboardViewModel: DashboardViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +34,7 @@ class FragmentCars : BaseFragmentWithBinding<FragmentCarsBinding>
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.VERTICAL,false)
-        binding.recyclerView.adapter = DashboardMainMenuAdapter(requireContext(),list,this)
+        binding.recyclerView.adapter = CarListAdapter(requireContext(),list,this)
     }
 
     override fun onClick(id: Int) {

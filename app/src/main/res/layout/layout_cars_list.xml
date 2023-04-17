@@ -13,7 +13,8 @@
         android:layout_height="@dimen/dp150"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/app_description"/>
 
     <TextView
         android:id="@+id/txtCarName"
@@ -21,22 +22,27 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="18sp"
+        android:textSize="@dimen/sp22"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivCar"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Audi" />
+        tools:text="Audi"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        />
 
     <TextView
         android:id="@+id/txtCarMoto"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:textSize="@dimen/sp18"
-        app:layout_constraintBottom_toBottomOf="@+id/ivCar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivCar"
         app:layout_constraintTop_toBottomOf="@+id/txtCarName"
+        android:fontFamily="monospace"
         tools:text="Intelligent Dutch Technique" />
 </androidx.constraintlayout.widget.ConstraintLayout>

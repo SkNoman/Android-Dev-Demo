@@ -48,6 +48,7 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                     ,requireActivity())
                 fetchMenuFromLocal()
             }
+            fetchMenuFromLocal()
             demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
                 val response = it.string()
                 val regex = Regex(":([0-9]+)")
@@ -129,6 +130,8 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
         dashboardViewModel.getDashboardMainMenuFromLocalDB.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 showMenus(it)
+            }else{
+                Toast(requireContext()).showCustomToast("No menu found",requireActivity())
             }
         }
     }
