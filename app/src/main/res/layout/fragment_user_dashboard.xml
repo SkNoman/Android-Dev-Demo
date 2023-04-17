@@ -59,8 +59,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_dashboard_top">
+        app:layout_constraintTop_toBottomOf="@+id/layout_dashboard_top"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/scrolling_layout"
@@ -97,8 +99,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp16"
                 android:layout_margin="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp16"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -107,13 +109,13 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
                     android:layout_width="0dp"
-                    app:layout_constraintWidth_percent=".47"
                     android:layout_height="250dp"
                     android:background="@drawable/bg_slider_title_bar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintWidth_percent=".47">
 
 
                     <ImageView
@@ -174,7 +176,9 @@
                         android:src="@drawable/ic_baseline_star_rate_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:contentDescription="@string/app_name"
+                        />
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -186,7 +190,8 @@
                         android:src="@drawable/ic_baseline_star_rate_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView9"
-                        app:layout_constraintStart_toEndOf="@+id/imageView7" />
+                        app:layout_constraintStart_toEndOf="@+id/imageView7"
+                        android:contentDescription="@string/app_name"/>
 
                     <ImageView
                         android:id="@+id/imageView9"
@@ -196,34 +201,46 @@
                         android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_baseline_star_rate_24"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView8" />
+                        app:layout_constraintStart_toEndOf="@+id/imageView8"
+                        android:contentDescription="@string/app_name"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
-                    app:layout_constraintWidth_percent=".47"
                     android:layout_height="250dp"
                     android:background="@drawable/bg_featurd_list"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".47">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/featured_recycler_view"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="155dp"
+                        android:layout_height="228dp"
+                        android:layout_margin="@dimen/dp8"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_margin="@dimen/dp8"
                         android:background="@color/white"
-                        tools:listitem="@layout/item_featured_menu_list"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/item_featured_menu_list" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="24dp"
+                        android:src="@drawable/ic_baseline_chevron_right_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:contentDescription="@string/app_name"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -231,9 +248,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/navigation_menu" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

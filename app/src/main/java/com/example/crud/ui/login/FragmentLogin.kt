@@ -19,9 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentLogin: BaseFragmentWithBinding<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-
     private val signInSignUpViewModel: SignInSignUpViewModel by viewModels()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

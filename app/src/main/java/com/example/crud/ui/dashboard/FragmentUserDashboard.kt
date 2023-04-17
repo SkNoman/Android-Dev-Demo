@@ -30,10 +30,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBinding>
     (FragmentUserDashboardBinding:: inflate),OnClickMenu {
-    private val timer = Timer()
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val demoViewModel: DemoViewModel by viewModels()
     @RequiresApi(Build.VERSION_CODES.M)
@@ -69,13 +69,23 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
             featuredRecycler()
         }
 
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.cancel() // Cancel the Timer to stop auto scrolling
-    }
 
+        binding.bottomNavigation.setOnNavigationItemReselectedListener { item ->
+            when(item.itemId) {
+                R.id.users -> {
+                    findNavController().navigate(R.id.fragmentLogin)
+                }
+                R.id.item2 -> {
+                    findNavController().navigate(R.id.users)
+                }
+                R.id.item3 ->{
+                    findNavController().navigate(R.id.fragmentCars)
+                }
 
+            }
+        }
+
+    }
     private  fun featuredRecycler() {
         binding.featuredRecyclerView.setHasFixedSize(true)
         binding.featuredRecyclerView.layoutManager = LinearLayoutManager(
@@ -158,7 +168,6 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
         //EACH ID REPRESENTS DIFFERENT FEATURE WHICH IS DEFINED IN DATABASE
         when(id){
             1->{
-                timer.cancel()
                 findNavController().navigate(R.id.fragmentCars)
             }
             else->{

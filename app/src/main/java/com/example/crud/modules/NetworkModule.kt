@@ -1,13 +1,7 @@
 package com.example.crud.modules
 
 import com.example.crud.BuildConfig
-import com.example.crud.local.dao.DashboardDao
 import com.example.crud.network.APIInterface
-import com.example.crud.utils.Constant.CLIENT_TYPE
-import com.example.crud.utils.Constant.KEY_CLIENT_TYPE
-import com.example.crud.utils.Constant.KEY_CLIENT_VERSION
-import com.example.crud.utils.Constant.KEY_CURRENT_BUILD_VERSION
-import com.example.crud.utils.Constant.KEY_JSON
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
