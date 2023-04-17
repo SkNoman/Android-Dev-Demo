@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.crud.R
 import com.example.crud.model.dashboard.MenusItem
+import com.example.crud.model.menu.CarlistItem
 
-class CarListAdapter(context: Context,carList: List<MenusItem>,private var onCarClickCar: OnClickCar)
+class CarListAdapter(context: Context,carList: List<CarlistItem?>,private var onCarClickCar: OnClickCar)
     : RecyclerView.Adapter<CarListItemViewHolder>()
 {
     private var mContext: Context = context
-    private val content : List<MenusItem> = carList
+    private val content : List<CarlistItem?> = carList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarListItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,10 +27,10 @@ class CarListAdapter(context: Context,carList: List<MenusItem>,private var onCar
     }
 
     override fun onBindViewHolder(holder: CarListItemViewHolder, position: Int) {
-        val menuContent: MenusItem = content[position]
+        val menuContent: CarlistItem? = content[position]
         holder.bind(mContext,menuContent)
         holder.itemView.setOnClickListener{
-            onCarClickCar.onClick(menuContent.menuId!!)
+            onCarClickCar.onClick(menuContent!!.carId!!)
         }
     }
 }
@@ -43,10 +44,10 @@ RecyclerView.ViewHolder(inflater.inflate(R.layout.layout_cars_list,parent,false)
     private var carName: TextView = itemView.findViewById(R.id.txtCarName)
     private var carMoto: TextView = itemView.findViewById(R.id.txtCarMoto)
     private var carIcon: ImageView = itemView.findViewById(R.id.ivCar)
-    fun bind(context: Context,carListData: MenusItem){
-        carName.text = carListData.menuTitle
-        carMoto.text = "This is a test application to learn BT,LC,DI to improve awaz dependency"
-        Glide.with(context).load(carListData.menuImage)
+    fun bind(context: Context,carListData: CarlistItem?){
+        carName.text = carListData!!.carName
+        carMoto.text = carListData.carType
+        Glide.with(context).load(carListData.carImage)
             .placeholder(R.drawable.preloader).into(carIcon)
     }
 }

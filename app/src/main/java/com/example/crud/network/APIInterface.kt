@@ -3,6 +3,7 @@ package com.example.crud.network
 import com.example.crud.model.dashboard.DashboardMainMenuResponse
 import com.example.crud.model.free.Users
 import com.example.crud.model.login.LoginResponse
+import com.example.crud.model.menu.AllCarListResponse
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -36,4 +37,9 @@ interface APIInterface {
     fun getMainMenuList(
         @Url url: String
     ):Call<DashboardMainMenuResponse>
+
+    @GET()
+    fun getAllCars(
+        @Url url:String
+    ):Call<AllCarListResponse>
 }
