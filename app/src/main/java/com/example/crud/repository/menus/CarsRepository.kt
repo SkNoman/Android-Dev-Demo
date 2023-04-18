@@ -24,7 +24,7 @@ class CarsRepository @Inject constructor(private val api: APIInterface){
             }
 
             override fun onFailure(call: Call<AllCarListResponse>, t: Throwable) {
-                t.localizedMessage?.let { ErrorResponse(500, it.toString()) }
+                t.localizedMessage?.let { ErrorResponse(500, it) }
                     ?.let { callback.onError(it) }
             }
 

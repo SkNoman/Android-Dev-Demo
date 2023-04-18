@@ -6,22 +6,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crud.BuildConfig
 import com.example.crud.R
 import com.example.crud.base.BaseFragmentWithBinding
 import com.example.crud.databinding.FragmentCarsBinding
-import com.example.crud.model.dashboard.MenusItem
-import com.example.crud.model.menu.AllCarListResponse
-import com.example.crud.model.menu.CarlistItem
+import com.example.crud.model.menu.CarListItem
 import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.CarListAdapter
 import com.example.crud.ui.adapters.OnClickCar
 import com.example.crud.utils.CheckNetwork
 import com.example.crud.utils.showCustomToast
-import com.example.crud.viewmodel.DashboardViewModel
 import com.example.crud.viewmodel.menus.CarsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,8 +44,8 @@ class FragmentCars : BaseFragmentWithBinding<FragmentCarsBinding>
 
     private fun observeCarList() {
         carsViewModel.allCarList.observe(viewLifecycleOwner) {
-            if (it.carlist!!.isNotEmpty()){
-                showCarList(it.carlist)
+            if (it.carList!!.isNotEmpty()){
+                showCarList(it.carList)
             }
         }
         carsViewModel.errorResponse.observe(viewLifecycleOwner){
@@ -60,7 +56,7 @@ class FragmentCars : BaseFragmentWithBinding<FragmentCarsBinding>
         }
     }
 
-    private fun showCarList(list: List<CarlistItem?>) {
+    private fun showCarList(list: List<CarListItem?>) {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.VERTICAL,false)
