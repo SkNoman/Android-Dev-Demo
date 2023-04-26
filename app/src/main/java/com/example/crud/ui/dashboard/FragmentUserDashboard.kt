@@ -2,6 +2,8 @@ package com.example.crud.ui.dashboard
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -10,16 +12,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.example.crud.BuildConfig
 import com.example.crud.R
 import com.example.crud.base.BaseFragmentWithBinding
 import com.example.crud.databinding.FragmentUserDashboardBinding
+import com.example.crud.model.SlideItem
 import com.example.crud.model.dashboard.FeaturedItem
 import com.example.crud.model.dashboard.MenusItem
 import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.DashboardMainMenuAdapter
 import com.example.crud.ui.adapters.FeaturedListItemAdapter
 import com.example.crud.ui.adapters.OnClickMenu
+import com.example.crud.ui.adapters.SlideItemAdapter
 import com.example.crud.utils.CheckNetwork
 import com.example.crud.utils.SharedPref
 import com.example.crud.utils.showCustomToast
@@ -27,6 +35,7 @@ import com.example.crud.viewmodel.DashboardViewModel
 import com.example.crud.viewmodel.DemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.lang.Math.abs
 import java.util.*
 
 
@@ -36,6 +45,7 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
     (FragmentUserDashboardBinding:: inflate),OnClickMenu {
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val demoViewModel: DemoViewModel by viewModels()
+    private val handler = Handler(Looper.getMainLooper())
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,6 +79,11 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
         lifecycleScope.launch {
             featuredRecycler()
         }
+        lifecycleScope.launch {
+            slideImageItem()
+        }
+
+
 
 
         binding.bottomNavigation.setOnNavigationItemReselectedListener { item ->
@@ -87,6 +102,44 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
         }
 
     }
+    val viewPagerRunnable = object : Runnable {
+        override fun run() {
+            binding.viewPager.currentItem = binding.viewPager.currentItem + 1
+            handler.postDelayed(this, 2000)
+        }
+    }
+
+    private fun slideImageItem() {
+        val sliderItem :ArrayList<SlideItem> = ArrayList()
+        sliderItem.add(SlideItem(R.drawable.item1))
+        sliderItem.add(SlideItem(R.drawable.item2))
+        sliderItem.add(SlideItem(R.drawable.item3))
+        binding.viewPager.apply {
+            adapter = SlideItemAdapter(sliderItem)
+            clipToPadding = false
+            clipChildren = false
+            offscreenPageLimit = sliderItem.size
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        }
+     /*   val compositionTransformer = CompositePageTransformer()
+        compositionTransformer.addTransformer(MarginPageTransformer(10))
+        compositionTransformer.addTransformer { page, position ->
+            val r = 1 - kotlin.math.abs(position)
+            page.scaleY = 0.80f + r * 01.1f
+        }
+        binding.viewPager.setPageTransformer(compositionTransformer)*/
+
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                handler.removeCallbacks(viewPagerRunnable)
+                handler.postDelayed(viewPagerRunnable, 2000)
+            }
+        })
+
+
+
+    }
+
     private  fun featuredRecycler() {
         binding.featuredRecyclerView.setHasFixedSize(true)
         binding.featuredRecyclerView.layoutManager = LinearLayoutManager(
