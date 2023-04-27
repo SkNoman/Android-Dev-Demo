@@ -1,5 +1,6 @@
 package com.example.crud.viewmodel.menus
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.crud.callbacks.menu.GetAllCarListCallback
@@ -20,6 +21,7 @@ class CarsViewModel @Inject constructor(private val carsRepository: CarsReposito
         carsRepository.getAllCarList(url,this)
     }
     override fun onResponse(data: AllCarListResponse) {
+        Log.e("nlog",data.carlist.toString())
         allCarList.postValue(data)
     }
 

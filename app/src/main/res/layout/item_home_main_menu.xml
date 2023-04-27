@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/android"
-        android:contentDescription="@string/car_hub"/>
+        android:contentDescription="@string/app_name"/>
 
     <TextView
         android:id="@+id/menu_title"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="monospace"
-        android:text="@string/car_hub"
+        android:text="@string/app_name"
         android:textColor="@color/black"
         android:gravity="center"
         android:textSize="12sp"

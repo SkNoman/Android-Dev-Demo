@@ -1,5 +1,6 @@
 package com.example.crud.repository.menus
 
+import android.util.Log
 import com.example.crud.callbacks.menu.GetAllCarListCallback
 import com.example.crud.model.ErrorResponse
 import com.example.crud.model.menu.AllCarListResponse
@@ -17,6 +18,7 @@ class CarsRepository @Inject constructor(private val api: APIInterface){
                 response: Response<AllCarListResponse>
             ) {
                 if (response.isSuccessful){
+                    Log.e("nlog-repo",response.body().toString())
                     callback.onResponse(response.body()!!)
                 }else{
                     callback.onError(ErrorResponse(500,Constant.ERROR_MESSAGE))

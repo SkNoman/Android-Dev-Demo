@@ -39,10 +39,18 @@
         <action
             android:id="@+id/action_fragmentUserDashboard_to_fragmentCars"
             app:destination="@id/fragmentCars" />
+        <action
+            android:id="@+id/action_fragmentUserDashboard_to_fragmentFridge"
+            app:destination="@id/fragmentFridge" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCars"
         android:name="com.example.crud.ui.dashboard.menus.FragmentCars"
         android:label="fragment_cars"
         tools:layout="@layout/fragment_cars" />
+    <fragment
+        android:id="@+id/fragmentFridge"
+        android:name="com.example.crud.ui.dashboard.menus.FragmentFridge"
+        android:label="fragment_fridge"
+        tools:layout="@layout/fragment_fridge" />
 </navigation>

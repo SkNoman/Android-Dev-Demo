@@ -108,6 +108,9 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     //Rounded Image
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    //WEB View
+    implementation 'androidx.webkit:webkit:1.6.1'
+
 
 
 }

@@ -1,7 +1,7 @@
 package com.example.crud.model.menu
 
 data class AllCarListResponse(
-	val carList: List<CarListItem?>? = null
+	val carlist: List<CarListItem?>? = null
 )
 
 data class CarListItem(

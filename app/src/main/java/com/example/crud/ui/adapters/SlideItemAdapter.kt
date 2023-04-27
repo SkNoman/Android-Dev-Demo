@@ -30,7 +30,7 @@ class SlideItemAdapter(
     }
     private val viewPagerRunnable = Runnable {
         slideItemList.addAll(slideItemList)
-        notifyDataSetChanged()
+        notifyItemChanged(content.size)
     }
 }
 

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">CRUD</string>
+    <string name="app_name">My Walton</string>
     <string name="android_n_development">Android \nDevelopment</string>
-    <string name="app_description">This is a demo application to test database operation, advanched network calling, local db caching, full use of dependency injection, view binding, offline serivices, solve complex UI problems, proper threading and many more.</string>
+    <string name="app_description">This is a demo application to test database operation, advanced network calling, local db caching, full use of dependency injection, view binding, offline services, solve complex UI problems, proper threading and many more.</string>
     <string name="loader">Loader</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -17,11 +17,15 @@
     <string name="login_with_social_accounts">Login With Social Accounts</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
-    <string name="android_studio">android Studio</string>
     <string name="this_is_a_custom_toast">This is a custom Toast</string>
     <string name="phone">Phone</string>
-    <string name="car_hub">AWAZ Test</string>
     <string name="popular_tab">Popular Tab</string>
-    <string name="all_time_best_selling_vehicles">All Time Best Selling Vehicles</string>
+    <string name="all_time_best_selling_products">All time best selling products</string>
     <string name="pls_chk_internet">Please check your internet connection</string>
+    <string name="trending_now">Trending now</string>
+    <string name="best_selling_products">Best selling products</string>
+    <string name="walton">Walton</string>
+    <string name="search">Search</string>
+    <string name="walton_products">Walton products</string>
+    <string name="my_walton">My Walton</string>
 </resources>

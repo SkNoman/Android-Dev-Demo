@@ -17,16 +17,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/ivCarHeading"
         tools:itemCount="10"
         tools:listitem="@layout/layout_cars_list" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="0dp"
+        android:id="@+id/ivCarHeading"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="@dimen/dp5"
-        android:src="@drawable/android"
+        tools:src="@drawable/walton_awaz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".2"
         app:layout_constraintStart_toStartOf="parent"

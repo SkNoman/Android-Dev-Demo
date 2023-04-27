@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.crud.BuildConfig
 import com.example.crud.R
 import com.example.crud.base.BaseFragmentWithBinding
@@ -17,6 +18,7 @@ import com.example.crud.network.APIEndpoint
 import com.example.crud.ui.adapters.CarListAdapter
 import com.example.crud.ui.adapters.OnClickCar
 import com.example.crud.utils.CheckNetwork
+import com.example.crud.utils.Constant
 import com.example.crud.utils.showCustomToast
 import com.example.crud.viewmodel.menus.CarsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,14 +41,21 @@ class FragmentCars : BaseFragmentWithBinding<FragmentCarsBinding>
 
         observeCarList()
 
+        Glide.with(requireActivity()).
+        load("https://wallpaperaccess.com/full/1628631.jpg")
+            .placeholder(R.drawable.preloader).into(binding.ivCarHeading)
+
 
     }
 
     private fun observeCarList() {
         carsViewModel.allCarList.observe(viewLifecycleOwner) {
-            if (it.carList!!.isNotEmpty()){
-                showCarList(it.carList)
+            if (it.carlist.isNullOrEmpty()){
+                Toast(requireContext()).showCustomToast(Constant.ERROR_MESSAGE,requireActivity())
+            }else{
+                showCarList(it.carlist)
             }
+
         }
         carsViewModel.errorResponse.observe(viewLifecycleOwner){
             if (it.status == 500){
