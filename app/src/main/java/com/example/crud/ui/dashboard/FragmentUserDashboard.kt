@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import androidx.viewpager2.widget.ViewPager2
 import com.example.crud.BuildConfig
 import com.example.crud.R
@@ -39,10 +41,11 @@ import java.util.*
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
 class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBinding>
-    (FragmentUserDashboardBinding:: inflate),OnClickMenu {
+    (FragmentUserDashboardBinding:: inflate),OnClickMenu,OnRefreshListener {
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val demoViewModel: DemoViewModel by viewModels()
     private val handler = Handler(Looper.getMainLooper())
+    private lateinit var swipeLayout: SwipeRefreshLayout
 
 
     override fun onPause() {
@@ -68,7 +71,6 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                     ,requireActivity())
                 fetchMenuFromLocal()
             }
-            fetchMenuFromLocal()
             demoViewModel.demoLiveData.observe(viewLifecycleOwner) {
                 val response = it.string()
                 val regex = Regex(":([0-9]+)")
@@ -92,7 +94,8 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
             slideImageItem()
         }
 
-
+        swipeLayout = binding.layoutDashboard
+        swipeLayout.setOnRefreshListener(this)
 
 
         binding.bottomNavigation.setOnNavigationItemReselectedListener { item ->
@@ -276,5 +279,9 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                 Toast.makeText(requireContext(),"This feature is under development",Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onRefresh() {
+        swipeLayout.isRefreshing = false
     }
 }
