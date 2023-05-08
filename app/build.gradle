@@ -112,6 +112,8 @@ dependencies {
     implementation 'androidx.webkit:webkit:1.6.1'
     //Swipe Refresh Layout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    //Language support
+    implementation 'com.akexorcist:localization:1.2.11'
 
 
 

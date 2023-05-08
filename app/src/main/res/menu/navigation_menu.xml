@@ -17,6 +17,10 @@
             android:id="@+id/item3"
             android:icon="@drawable/ic_baseline_security_24"
             android:title="@string/app_name" />
+        <item
+            android:id="@+id/item4"
+            android:icon="@drawable/baseline_language_24"
+            android:title="Bangla"/>
     </group>
 
 </menu>

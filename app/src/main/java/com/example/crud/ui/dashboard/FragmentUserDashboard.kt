@@ -29,6 +29,7 @@ import com.example.crud.ui.adapters.FeaturedListItemAdapter
 import com.example.crud.ui.adapters.OnClickMenu
 import com.example.crud.ui.adapters.SlideItemAdapter
 import com.example.crud.utils.CheckNetwork
+import com.example.crud.utils.GoogleMaps
 import com.example.crud.utils.SharedPref
 import com.example.crud.utils.showCustomToast
 import com.example.crud.viewmodel.DashboardViewModel
@@ -97,7 +98,9 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
         swipeLayout = binding.layoutDashboard
         swipeLayout.setOnRefreshListener(this)
 
-
+        binding.txtTrendingNow.setOnClickListener{
+            GoogleMaps.openGoogleMaps(requireActivity(),23.9756079,90.394622)
+        }
         binding.bottomNavigation.setOnNavigationItemReselectedListener { item ->
             when(item.itemId) {
                 R.id.users -> {
@@ -276,10 +279,11 @@ class FragmentUserDashboard : BaseFragmentWithBinding<FragmentUserDashboardBindi
                 findNavController().navigate(R.id.fragmentFridge)
             }
             else->{
-                Toast.makeText(requireContext(),"This feature is under development",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.this_feature_is_under_development),Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     override fun onRefresh() {
         swipeLayout.isRefreshing = false

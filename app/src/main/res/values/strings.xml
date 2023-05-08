@@ -28,4 +28,5 @@
     <string name="search">Search</string>
     <string name="walton_products">Walton products</string>
     <string name="my_walton">My Walton</string>
+    <string name="this_feature_is_under_development">This feature is under development</string>
 </resources>

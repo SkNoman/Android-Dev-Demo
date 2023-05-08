@@ -1,10 +1,10 @@
 package com.example.crud
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.example.crud.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.users -> navController.navigate(R.id.fragmentUserDashboard)
                 R.id.item2 -> Toast.makeText(this,"Clicked Menu 2",Toast.LENGTH_SHORT).show()
                 R.id.item3 -> Toast.makeText(this,"Clicked Menu 3",Toast.LENGTH_SHORT).show()
+                R.id.item4 -> setAppLanguage("bn")
             }
             true
         }
@@ -74,6 +76,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun setAppLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val configuration = Configuration()
+        configuration.locale = locale
+
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+        recreate()
     }
 
     @Deprecated("Deprecated in Java")

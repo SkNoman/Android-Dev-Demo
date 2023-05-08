@@ -42,45 +42,75 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/btnMenu"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_baseline_menu_24" />
+                >
+
+                <ImageButton
+                    android:id="@+id/btnMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_baseline_menu_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/editText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <EditText
-                android:layout_gravity="center"
-                android:drawableStart="@drawable/baseline_search_24"
-                android:background="@drawable/bg_search_edit_text"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:hint="@string/walton_products"
-                android:padding="@dimen/dp10"
-                android:layout_marginStart="@dimen/dp20"
-                android:autofillHints="demo"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="3dp"
+                    android:autofillHints="demo"
+                    android:background="@drawable/bg_search_edit_text"
+                    android:drawableStart="@drawable/baseline_search_24"
+                    android:hint="@string/walton_products"
+                    android:inputType="text"
+                    android:padding="@dimen/dp10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnUserProfile"
+                    app:layout_constraintStart_toEndOf="@+id/btnMenu"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/btnNotification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/dp8"
-                android:backgroundTint="@color/transparent"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_baseline_notifications_24" />
+                <ImageButton
+                    android:id="@+id/btnNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_baseline_notifications_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnUserProfile"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/btnUserProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:backgroundTint="@color/transparent"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_baseline_person_pin_24" />
+                <ImageButton
+                    android:id="@+id/btnUserProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_baseline_person_pin_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnNotification"
+                    app:layout_constraintStart_toEndOf="@+id/editText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </com.google.android.material.appbar.MaterialToolbar>
 
